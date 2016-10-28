@@ -4,7 +4,7 @@
  * Author: Heng Wang
  * Student ID: 100976892
  * Last Modified by: Heng Wang
- * Last Modified Date: Oct 26, 2016
+ * Last Modified Date: Oct 27, 2016
  * */
 using UnityEngine;
 using System.Collections;
@@ -59,7 +59,19 @@ public class PlaneCollider : MonoBehaviour {
 				asrc.Play ();
 			}
 
-		}
+		}else if (other.gameObject.tag == "power") {
+
+			//Points add 15
+			Player.Instance.Points += 15;
+			//Health add 1
+			Player.Instance.Health += 1;
+			//hide power object
+			other.gameObject.SetActive (false);
+			//Increase plane speed
+			PlaneController plane = gameObject.GetComponent<PlaneController> ();
+			plane.PowerUpSpeed ();
+
 
 	}
+}
 }

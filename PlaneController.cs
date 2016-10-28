@@ -17,6 +17,9 @@ public class PlaneController : MonoBehaviour {
 	[SerializeField]
 	private float speedX;
 
+	[SerializeField]
+	GameObject missile = null;
+
 	private Vector2 _currentPosition;
 	private Transform _transform;
 	private float _playerInputY;
@@ -32,6 +35,7 @@ public class PlaneController : MonoBehaviour {
 	// Update position according to the input
 	void FixedUpdate () {
 
+
 		_playerInputY = Input.GetAxis ("Vertical");
 		_playerInputX = Input.GetAxis ("Horizontal");
 		if (_playerInputY > 0)
@@ -45,6 +49,16 @@ public class PlaneController : MonoBehaviour {
 			_currentPosition -= new Vector2 (speedX, 0);
 		CheckBound ();
 		_transform.position = _currentPosition;
+
+
+		if (Input.GetKeyDown (KeyCode.J)) {
+
+			GameObject mi = Instantiate (missile);
+			mi.transform.position = new Vector2 ((_transform.position.x+1.6f), (_transform.position.y+0.3f)); 
+		
+		}
+
+
 	}
 
 	//method keep the plane in the camera
@@ -59,6 +73,12 @@ public class PlaneController : MonoBehaviour {
 			_currentPosition.x = 10.5f;
 		if (_currentPosition.x < -10.5f)
 			_currentPosition.x = -10.5f;
+	}
+
+	public void PowerUpSpeed(){
+	
+		speedX += 0.02f;
+		speedY += 0.01f;
 	}
 	
 	}

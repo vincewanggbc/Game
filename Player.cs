@@ -4,7 +4,7 @@
  * Author: Heng Wang
  * Student ID: 100976892
  * Last Modified by: Heng Wang
- * Last Modified Date: Oct 26, 2016
+ * Last Modified Date: Oct 27, 2016
  * */
 using UnityEngine;
 using System.Collections;
@@ -15,6 +15,9 @@ public class Player {
 	private int _health = 5;
 
 	public HUDController hud;
+	public PowerController power;
+
+
 
 	private static Player _instance = null;
 	public static Player Instance{
@@ -46,6 +49,17 @@ public class Player {
 			HighScore = _points;
 			//Update points in UI
 			hud.UpdatePoints();
+			//Whenever player get 100 points, create a power object for player collect
+			if ((value >= 100) && (value % 100 == 0)) {
+				power.Reset ();
+			
+
+			}
+			//Display boss when point over 300
+			if (value >= 300&&value<=315) {
+
+				hud.ActiveBoss ();			
+			}
 		}
 	}
 
